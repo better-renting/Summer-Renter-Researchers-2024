@@ -26,6 +26,14 @@ State_summary <- I_data %>%  group_by(State) %>%
     # Calculate the percentage of times T_in is greater than T_out
     In_v_out = round(In_v_out_n*100/n_State,1),
     
+    # Calculate the mean difference between T_in and T_out when T_out > 21
+    T_diff_mean = round(mean(ifelse(T_out_mean > 21, T_in_mean - T_out_mean, NA), na.rm = TRUE), 1),
+    
+    # Calculate the mean difference between T_in and T_out when T_out > 21 AND T_in > T_out
+    T_diff_mean_21 = round(mean(ifelse(T_out_mean > 21 & T_in_mean > T_out_mean, T_in_mean - T_out_mean, NA), na.rm = TRUE), 1),
+    
+    
+    
     #Basic stats
     T_in_min = quantile(T_in_mean, probs = 0.01),
     T_in_q25 = quantile(T_in_mean, probs = 0.25), 
